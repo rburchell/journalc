@@ -5,8 +5,12 @@ OBJECTS_DIR = .obj
 
 QT += quick
 
+CONFIG += link_pkgconfig
+PKGCONFIG += libsystemd-journal
+
 SOURCES = \
-    src/main.cpp
+    src/main.cpp \
+    src/journalmodel.cpp
 
 HEADERS = \
     src/journalmodel.h
