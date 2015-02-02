@@ -16,7 +16,7 @@ ApplicationWindow {
             delegate: Rectangle {
                 color: index % 2 == 0 ? "red" : "blue"
                 width: ListView.view.width
-                height: 100
+                height: 30
 
                 Text {
                     anchors.centerIn: parent
