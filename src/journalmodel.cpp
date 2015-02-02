@@ -108,8 +108,26 @@ int JournalModel::rowCount(const QModelIndex &parent) const
 
 QVariant JournalModel::data(const QModelIndex &index, int role) const
 {
-    if (role == MessageRole)
-        return m_rows.at(index.row())->message();
+    switch (role) {
+        case MessageRole:
+            return m_rows.at(index.row())->message();
+        case MessageIdRole:
+            return m_rows.at(index.row())->messageId();
+        case PriorityRole:
+            return m_rows.at(index.row())->priority();
+        case CodeFileRole:
+            return m_rows.at(index.row())->codeFile();
+        case CodeLineRole:
+            return m_rows.at(index.row())->codeLine();
+        case CodeFuncRole:
+            return m_rows.at(index.row())->codeFunc();
+        case PidRole:
+            return m_rows.at(index.row())->pid();
+        case UidRole:
+            return m_rows.at(index.row())->uid();
+        case GidRole:
+            return m_rows.at(index.row())->gid();
+    }
     return QVariant();
 }
 
@@ -118,6 +136,14 @@ QHash<int, QByteArray> JournalModel::roleNames() const
     QHash<int, QByteArray> roles;
 
     roles[MessageRole] = "message";
+    roles[MessageIdRole] = "messageId";
+    roles[PriorityRole] = "priority";
+    roles[CodeFileRole] = "codeFile";
+    roles[CodeLineRole] = "codeLine";
+    roles[CodeFuncRole] = "codeFunc";
+    roles[PidRole] = "pid";
+    roles[UidRole] = "uid";
+    roles[GidRole] = "gid";
     return roles;
 }
 

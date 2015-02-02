@@ -32,6 +32,14 @@ public:
 
     enum Roles {
         MessageRole = Qt::UserRole,
+        MessageIdRole,
+        PriorityRole,
+        CodeFileRole,
+        CodeLineRole,
+        CodeFuncRole,
+        PidRole,
+        UidRole,
+        GidRole
     };
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
