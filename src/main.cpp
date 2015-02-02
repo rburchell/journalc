@@ -32,7 +32,8 @@ int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
 
-//    qmlRegisterType<TraceView>("SysViz", 1, 0, "TraceView");
+    // TODO: register as singleton maybe
+    qmlRegisterType<JournalModel>("JournalC", 1, 0, "JournalModel");
 
     JournalModel model;
 
