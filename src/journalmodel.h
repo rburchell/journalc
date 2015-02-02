@@ -30,6 +30,18 @@ class JournalModel : public QAbstractListModel
 public:
     JournalModel(QObject *parent = 0);
 
+    enum Priority : char {
+        EmergencyPriority,
+        AlertPriority,
+        CriticalPriority,
+        ErrorPriority,
+        WarningPriority,
+        NoticePriority,
+        InfoPriority,
+        DebugPriority
+    };
+    Q_ENUMS(Priority)
+
     enum Roles {
         MessageRole = Qt::UserRole,
         MessageIdRole,

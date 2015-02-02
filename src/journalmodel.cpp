@@ -25,13 +25,9 @@ struct JournalModelRow
 {
     static JournalModelRow *fromJournal(sd_journal *j);
 
-    enum Priority : char {
-        // TODO: syslog fields
-    };
-
     QString message() const { return m_message; }
     QByteArray messageId() const { return m_messageId; }
-    Priority priority() const { return m_priority; }
+    JournalModel::Priority priority() const { return m_priority; }
     QByteArray codeFile() const { return m_codeFile; }
     quint32 codeLine() const { return m_codeLine; }
     QByteArray codeFunc() const { return m_codeFunc; }
@@ -42,7 +38,7 @@ struct JournalModelRow
 private:
     QString m_message;
     QByteArray m_messageId;
-    Priority m_priority;
+    JournalModel::Priority m_priority;
     QByteArray m_codeFile;
     quint32 m_codeLine;
     QByteArray m_codeFunc;
@@ -72,7 +68,10 @@ JournalModelRow *JournalModelRow::fromJournal(sd_journal *j)
 
     jm->m_message = fetchDataFor(j, "MESSAGE");
     jm->m_messageId = fetchDataFor(j, "MESSAGE_ID").toLatin1();
-    jm->m_priority << fetchDataFor(j, "PRIORITY").toInt();
+    int prio = fetchDataFor(j, "PRIORITY").toInt();
+    if (prio < 0 || prio > 7)
+        prio = 5; // silently truncate invalid values
+    jm->m_priority = (JournalModel::Priority)prio;
     jm->m_codeFile = fetchDataFor(j, "CODE_FILE").toUtf8();
     jm->m_codeLine = fetchDataFor(j, "CODE_LINE").toInt();
     jm->m_codeFunc = fetchDataFor(j, "CODE_FUNC").toUtf8();
