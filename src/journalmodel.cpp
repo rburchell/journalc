@@ -108,6 +108,16 @@ int JournalModel::rowCount(const QModelIndex &parent) const
 
 QVariant JournalModel::data(const QModelIndex &index, int role) const
 {
+    if (role == MessageRole)
+        return m_rows.at(index.row())->message();
     return QVariant();
+}
+
+QHash<int, QByteArray> JournalModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+
+    roles[MessageRole] = "message";
+    return roles;
 }
 
