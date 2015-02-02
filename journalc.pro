@@ -6,6 +6,7 @@ OBJECTS_DIR = .obj
 QT += quick
 
 CONFIG += link_pkgconfig
+CONFIG += c++11
 PKGCONFIG += libsystemd-journal
 
 SOURCES = \
