@@ -36,17 +36,10 @@ int main(int argc, char **argv)
 
     JournalModel model;
 
-    QQuickView view;
-    QSurfaceFormat format = view.requestedFormat();
-    format.setSamples(16);
-    view.setFormat(format);
+    QQmlApplicationEngine engine;
 
-    view.rootContext()->setContextProperty("journalModel", &model);
-
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.setSource(QUrl::fromLocalFile("qml/main.qml"));
-    view.setTitle("journalc");
-    view.show();
+    engine.rootContext()->setContextProperty("journalModel", &model);
+    engine.load(QUrl::fromLocalFile("qml/main.qml"));
 
     app.exec();
 }

@@ -1,17 +1,28 @@
 import QtQuick 2.3
+import QtQuick.Controls 1.3
 
-Item {
+ApplicationWindow {
     width: 800
     height: 600
+    title: "journalc"
+    visible: true
 
-    ListView {
-        model: journalModel
+    ScrollView {
         anchors.fill: parent
+        ListView {
+            model: journalModel
+            anchors.fill: parent
 
-        delegate: Rectangle {
-            color: index % 2 == 0 ? "red" : "blue"
-            width: ListView.view.width
-            height: 100
+            delegate: Rectangle {
+                color: index % 2 == 0 ? "red" : "blue"
+                width: ListView.view.width
+                height: 100
+
+                Text {
+                    anchors.centerIn: parent
+                    text: model.message
+                }
+            }
         }
     }
 }
